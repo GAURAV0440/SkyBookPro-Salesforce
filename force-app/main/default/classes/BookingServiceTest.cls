@@ -318,5 +318,186 @@ private class BookingServiceTest {
         );
 
     }
+    @isTest
+    static void testGetBookingDetails() {
+
+        Account acc = new Account(Name = 'Details Account');
+        insert acc;
+
+        Contact con = new Contact(
+            LastName = 'Passenger',
+            Email = 'details@test.com',
+            AccountId = acc.Id
+        );
+        insert con;
+
+        Flight__c flight = new Flight__c(
+            Name = 'AI-201',
+            Flight_Number__c = 'AI201',
+            Airline_Name__c = 'Air India',
+            Origin_Airport__c = 'DEL',
+            Destination_Airport__c = 'BOM',
+            Departure_DateTime__c = System.now().addDays(2),
+            Arrival_DateTime__c = System.now().addDays(2).addHours(2),
+            Status__c = 'Active'
+        );
+        insert flight;
+
+        Booking__c booking =
+            BookingService.createBooking(
+                acc.Id,
+                con.Id,
+                flight.Id,
+                5000,
+                'Economy'
+            );
+
+        Test.startTest();
+
+        Booking__c result =
+            BookingService.getBookingDetails(
+                booking.Id
+            );
+
+        Test.stopTest();
+
+        System.assertEquals(
+            booking.Id,
+            result.Id
+        );
+    }
+
+    @isTest
+    static void testCancelBooking() {
+
+        Account acc = new Account(Name='Cancel');
+        insert acc;
+
+        Contact con = new Contact(
+            LastName='Passenger',
+            Email='cancel@test.com',
+            AccountId=acc.Id
+        );
+        insert con;
+
+        Flight__c flight = new Flight__c(
+            Name='AI-202',
+            Flight_Number__c='AI202',
+            Airline_Name__c='Air India',
+            Origin_Airport__c='DEL',
+            Destination_Airport__c='BLR',
+            Departure_DateTime__c=System.now().addDays(3),
+            Arrival_DateTime__c=System.now().addDays(3).addHours(2),
+            Status__c='Active'
+        );
+        insert flight;
+
+        Booking__c booking =
+            BookingService.createBooking(
+                acc.Id,
+                con.Id,
+                flight.Id,
+                5000,
+                'Economy'
+            );
+
+        Test.startTest();
+
+        BookingService.cancelBooking(
+            booking.Id
+        );
+
+        Test.stopTest();
+
+        Booking__c updated = [
+            SELECT Booking_Status__c
+            FROM Booking__c
+            WHERE Id=:booking.Id
+        ];
+
+        System.assertEquals(
+            'Cancelled',
+            updated.Booking_Status__c
+        );
+    }
+
+    @isTest
+    static void testRefundStatusCancelled() {
+
+        Account acc = new Account(Name='Refund');
+        insert acc;
+
+        Contact con = new Contact(
+            LastName='Passenger',
+            Email='refundstatus@test.com',
+            AccountId=acc.Id
+        );
+        insert con;
+
+        Flight__c flight = new Flight__c(
+            Name='AI-203',
+            Flight_Number__c='AI203',
+            Airline_Name__c='Air India',
+            Origin_Airport__c='DEL',
+            Destination_Airport__c='GOA',
+            Departure_DateTime__c=System.now().addDays(2),
+            Arrival_DateTime__c=System.now().addDays(2).addHours(2),
+            Status__c='Active'
+        );
+        insert flight;
+
+        Booking__c booking =
+            BookingService.createBooking(
+                acc.Id,
+                con.Id,
+                flight.Id,
+                5000,
+                'Economy'
+            );
+
+        booking.Booking_Status__c = 'Cancelled';
+        booking.Cancellation_Reason__c = 'Test Cancellation';
+        update booking;
+
+        Test.startTest();
+
+        String status =
+            BookingService.getRefundStatus(
+                booking.Id
+            );
+
+        Test.stopTest();
+
+        System.assertEquals(
+            'Processing',
+            status
+        );
+    }
+
+    @isTest
+    static void testInitializeBookingDefaults() {
+
+        Booking__c booking =
+            new Booking__c();
+
+        BookingService.initializeBooking(
+            new List<Booking__c>{booking}
+        );
+
+        System.assertEquals(
+            'Draft',
+            booking.Booking_Status__c
+        );
+
+        System.assertEquals(
+            'Economy',
+            booking.Seat_Class__c
+        );
+
+        System.assertEquals(
+            1,
+            booking.Number_of_Seats__c
+        );
+    }
 
 }

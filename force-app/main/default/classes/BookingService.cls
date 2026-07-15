@@ -184,13 +184,15 @@ public with sharing class BookingService {
 
         Booking__c booking = [
             SELECT Id,
-                   Booking_Status__c
+                Booking_Status__c,
+                Cancellation_Reason__c
             FROM Booking__c
             WHERE Id = :bookingId
             LIMIT 1
         ];
 
         booking.Booking_Status__c = 'Cancelled';
+        booking.Cancellation_Reason__c = 'Cancelled by Customer';
 
         update booking;
     }
