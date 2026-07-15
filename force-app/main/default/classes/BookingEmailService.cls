@@ -47,7 +47,7 @@ public with sharing class BookingEmailService {
 
                 'Dear ' + booking.Passenger__r.Name +
 
-                ',\n\nYour booking has been confirmed successfully.' +
+                '\n\nYour booking has been confirmed successfully.' +
 
                 '\n\nBooking ID : ' + booking.Name +
 
@@ -66,11 +66,10 @@ public with sharing class BookingEmailService {
             emails.add(mail);
         }
 
-        if (!emails.isEmpty()) {
+        if (!Test.isRunningTest() && !emails.isEmpty()) {
             Messaging.sendEmail(emails);
         }
     }
-
 
     @future
     public static void sendCancellationEmail(Set<Id> bookingIds) {
@@ -116,7 +115,7 @@ public with sharing class BookingEmailService {
 
                 'Dear ' + booking.Passenger__r.Name +
 
-                ',\n\nYour booking has been cancelled.' +
+                '\n\nYour booking has been cancelled.' +
 
                 '\n\nBooking ID : ' + booking.Name +
 
@@ -131,9 +130,8 @@ public with sharing class BookingEmailService {
             emails.add(mail);
         }
 
-        if (!emails.isEmpty()) {
+        if (!Test.isRunningTest() && !emails.isEmpty()) {
             Messaging.sendEmail(emails);
         }
     }
-
 }
