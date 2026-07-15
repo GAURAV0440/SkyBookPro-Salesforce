@@ -1,0 +1,150 @@
+<template>
+
+    <lightning-card title="Passenger Details">
+
+        <div class="slds-p-around_medium">
+
+            <template
+                for:each={passengers}
+                for:item="passenger">
+
+                <div
+                    key={passenger.id}
+                    class="slds-box slds-m-bottom_medium">
+
+                    <h3 class="slds-text-heading_small slds-m-bottom_medium">
+
+                        Passenger {passenger.id}
+
+                    </h3>
+
+                    <div class="slds-grid slds-wrap slds-gutters">
+
+                        <!-- First Name -->
+
+                        <div class="slds-col slds-size_1-of-2">
+
+                            <lightning-input
+                                label="First Name"
+                                name="firstName"
+                                value={passenger.firstName}
+                                data-index={passenger.id}
+                                required
+                                onchange={handleChange}>
+                            </lightning-input>
+
+                        </div>
+
+                        <!-- Last Name -->
+
+                        <div class="slds-col slds-size_1-of-2">
+
+                            <lightning-input
+                                label="Last Name"
+                                name="lastName"
+                                value={passenger.lastName}
+                                data-index={passenger.id}
+                                required
+                                onchange={handleChange}>
+                            </lightning-input>
+
+                        </div>
+
+                        <!-- Email -->
+
+                        <div class="slds-col slds-size_1-of-2">
+
+                            <lightning-input
+                                type="email"
+                                label="Email"
+                                name="email"
+                                value={passenger.email}
+                                data-index={passenger.id}
+                                required
+                                onchange={handleChange}>
+                            </lightning-input>
+
+                        </div>
+
+                        <!-- Phone -->
+
+                        <div class="slds-col slds-size_1-of-2">
+
+                            <lightning-input
+                                type="tel"
+                                label="Phone"
+                                name="phone"
+                                value={passenger.phone}
+                                data-index={passenger.id}
+                                required
+                                onchange={handleChange}>
+                            </lightning-input>
+
+                        </div>
+
+                        <!-- DOB -->
+
+                        <div class="slds-col slds-size_1-of-2">
+
+                            <lightning-input
+                                type="date"
+                                label="Date of Birth"
+                                name="dob"
+                                value={passenger.dob}
+                                data-index={passenger.id}
+                                required
+                                onchange={handleChange}>
+                            </lightning-input>
+
+                        </div>
+
+                        <!-- Passport -->
+
+                        <div class="slds-col slds-size_1-of-2">
+
+                            <lightning-input
+                                label="Passport Number"
+                                name="passport"
+                                value={passenger.passport}
+                                data-index={passenger.id}
+                                onchange={handleChange}>
+                            </lightning-input>
+
+                        </div>
+
+                        <!-- Meal -->
+
+                        <div class="slds-col slds-size_1-of-2">
+
+                            <lightning-combobox
+                                label="Meal Preference"
+                                name="mealPreference"
+                                value={passenger.mealPreference}
+                                options={mealOptions}
+                                data-index={passenger.id}
+                                onchange={handleChange}>
+                            </lightning-combobox>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </template>
+
+            <div class="slds-align_absolute-center slds-m-top_large">
+
+                <lightning-button
+                    label="Continue to Booking Confirmation"
+                    variant="brand"
+                    onclick={handleContinue}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+
+    </lightning-card>
+
+</template>

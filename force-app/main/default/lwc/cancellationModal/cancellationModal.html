@@ -1,0 +1,25 @@
+<template>
+
+    <lightning-card title="Cancel Booking">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-textarea
+                label="Cancellation Reason"
+                value={reason}
+                onchange={handleReasonChange}>
+            </lightning-textarea>
+
+            <br>
+
+            <lightning-button
+                label="Cancel Booking"
+                variant="destructive"
+                onclick={handleCancelBooking}>
+            </lightning-button>
+
+        </div>
+
+    </lightning-card>
+
+</template>

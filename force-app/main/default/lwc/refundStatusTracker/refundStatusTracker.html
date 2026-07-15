@@ -1,0 +1,33 @@
+<template>
+
+    <lightning-card title="Refund Status">
+
+        <div class="slds-p-around_medium">
+
+            <p>
+
+                Current Status:
+
+                <b>
+                    {refundStatus}
+                </b>
+
+            </p>
+
+            <template if:true={isRefunded}>
+
+                <lightning-icon
+                    icon-name="utility:success"
+                    size="small"
+                    variant="success">
+                </lightning-icon>
+
+                Refund Completed
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

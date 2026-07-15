@@ -1,0 +1,66 @@
+<template>
+
+    <lightning-card title="My Bookings">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-button
+                label="All"
+                data-filter="all"
+                onclick={handleFilter}>
+            </lightning-button>
+
+            <lightning-button
+                label="Upcoming"
+                data-filter="upcoming"
+                onclick={handleFilter}>
+            </lightning-button>
+
+            <lightning-button
+                label="Past"
+                data-filter="past"
+                onclick={handleFilter}>
+            </lightning-button>
+
+            <lightning-button
+                label="Cancelled"
+                data-filter="cancelled"
+                onclick={handleFilter}>
+            </lightning-button>
+
+        </div>
+
+        <template if:true={bookings}>
+
+            <lightning-datatable
+                key-field="Id"
+                data={bookings}
+                columns={columns}
+                onrowaction={handleRowAction}>
+            </lightning-datatable>
+
+        </template>
+
+        <template if:true={selectedBookingId}>
+
+            <br>
+
+            <c-booking-detail-view
+                booking-id={selectedBookingId}>
+            </c-booking-detail-view>
+
+        </template>
+
+        <template if:true={error}>
+
+            <div class="slds-p-around_medium">
+
+                Error loading bookings.
+
+            </div>
+
+        </template>
+
+    </lightning-card>
+
+</template>

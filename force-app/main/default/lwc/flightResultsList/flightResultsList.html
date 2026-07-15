@@ -1,0 +1,74 @@
+<template>
+
+    <lightning-card title="Available Flights">
+
+        <div class="slds-p-around_medium">
+
+            <div class="slds-grid slds-wrap slds-gutters">
+
+                <div class="slds-col slds-size_1-of-2">
+
+                    <lightning-combobox
+                        label="Filter Airline"
+                        value={selectedAirline}
+                        options={airlineOptions}
+                        onchange={handleAirlineChange}>
+                    </lightning-combobox>
+
+                </div>
+
+                <div class="slds-col slds-size_1-of-2">
+
+                    <lightning-combobox
+                        label="Sort By"
+                        value={sortBy}
+                        options={sortOptions}
+                        onchange={handleSortChange}>
+                    </lightning-combobox>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <template if:true={hasFlights}>
+
+            <template
+                for:each={filteredFlights}
+                for:item="flight">
+
+                <c-flight-result-card
+                    key={flight.offerId}
+                    flight={flight}
+                    onselectflight={handleSelectFlight}>
+                </c-flight-result-card>
+
+            </template>
+
+        </template>
+
+        <template if:false={hasFlights}>
+
+            <div class="slds-p-around_large slds-align_absolute-center">
+
+                <lightning-icon
+                    icon-name="utility:search"
+                    size="small">
+                </lightning-icon>
+
+                <br/><br/>
+
+                <p class="slds-text-heading_small">
+
+                    Search flights to see available offers.
+
+                </p>
+
+            </div>
+
+        </template>
+
+    </lightning-card>
+
+</template>

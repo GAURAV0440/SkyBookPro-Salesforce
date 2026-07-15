@@ -1,0 +1,136 @@
+<template>
+
+    <lightning-card title="Booking Confirmation">
+
+        <div class="slds-p-around_large">
+
+            <div class="slds-box slds-theme_default">
+
+                <h2 class="slds-text-heading_medium">
+                    Flight Details
+                </h2>
+
+                <br/>
+
+                <p>
+                    <strong>Airline:</strong>
+                    {flight.airline}
+                </p>
+
+                <p>
+                    <strong>Flight Number:</strong>
+                    {flight.flightNumber}
+                </p>
+
+                <p>
+                    <strong>Route:</strong>
+                    {flight.origin}
+                    →
+                    {flight.destination}
+                </p>
+
+                <p>
+                    <strong>Departure:</strong>
+                    {flight.departureTime}
+                </p>
+
+                <p>
+                    <strong>Arrival:</strong>
+                    {flight.arrivalTime}
+                </p>
+
+                <p>
+                    <strong>Seat Class:</strong>
+                    {flight.seatClass}
+                </p>
+
+            </div>
+
+            <br/>
+
+            <div class="slds-box slds-theme_default">
+
+                <h2 class="slds-text-heading_medium">
+                    Passenger Details
+                </h2>
+
+                <br/>
+
+                <p>
+                    <strong>Name:</strong>
+                    {passenger.firstName}
+                    {passenger.lastName}
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    {passenger.email}
+                </p>
+
+                <p>
+                    <strong>Phone:</strong>
+                    {passenger.phone}
+                </p>
+
+                <p>
+                    <strong>Date of Birth:</strong>
+                    {passenger.dob}
+                </p>
+
+                <template if:true={passenger.passport}>
+
+                    <p>
+                        <strong>Passport:</strong>
+                        {passenger.passport}
+                    </p>
+
+                </template>
+
+                <p>
+                    <strong>Meal Preference:</strong>
+                    {passenger.mealPreference}
+                </p>
+
+            </div>
+
+            <br/>
+
+            <div class="slds-box slds-theme_success">
+
+                <h2 class="slds-text-heading_medium">
+                    Fare Summary
+                </h2>
+
+                <br/>
+
+                <p>
+                    <strong>Passengers:</strong>
+                    {bookingData.passengerCount}
+                </p>
+
+                <p>
+                    <strong>Total Fare:</strong>
+                    {totalFare}
+                    GBP
+                </p>
+
+            </div>
+
+            <br/>
+
+            <div class="slds-align_absolute-center">
+
+                <lightning-button
+                    label="Confirm Booking"
+                    variant="brand"
+                    onclick={handleConfirmBooking}
+                    disabled={isLoading}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+
+    </lightning-card>
+
+</template>

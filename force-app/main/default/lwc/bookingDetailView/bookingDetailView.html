@@ -1,0 +1,60 @@
+<template>
+
+    <lightning-card title="Booking Details">
+
+        <template if:true={booking}>
+
+            <div class="slds-p-around_medium">
+
+                <p>
+                    <b>Booking:</b>
+                    {booking.Name}
+                </p>
+
+                <p>
+                    <b>Status:</b>
+                    {booking.Booking_Status__c}
+                </p>
+
+                <p>
+                    <b>Flight:</b>
+                    {booking.Flight__r.Name}
+                </p>
+
+                <p>
+                    <b>Passenger:</b>
+                    {booking.Passenger__r.Name}
+                </p>
+
+                <p>
+                    <b>Seat Class:</b>
+                    {booking.Seat_Class__c}
+                </p>
+
+                <p>
+                    <b>Base Fare:</b>
+                    {booking.Base_Fare__c}
+                </p>
+
+                <p>
+                    <b>Taxes:</b>
+                    {booking.Taxes_Fees__c}
+                </p>
+
+            </div>
+
+        </template>
+
+        <template if:true={error}>
+
+            <div class="slds-p-around_medium">
+
+                Error loading booking details.
+
+            </div>
+
+        </template>
+
+    </lightning-card>
+
+</template>

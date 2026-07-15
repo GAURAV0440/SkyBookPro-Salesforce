@@ -1,0 +1,68 @@
+<template>
+
+    <lightning-card title="Agent Dashboard">
+
+        <div class="slds-p-around_medium">
+
+            <p>
+
+                <b>
+                    Total Bookings:
+                </b>
+
+                {totalBookings}
+
+            </p>
+
+            <p>
+
+                <b>
+                    Total Revenue:
+                </b>
+
+                ₹{totalRevenue}
+
+            </p>
+
+            <br>
+
+            <lightning-button
+                label="Create Booking"
+                variant="brand"
+                onclick={handleCreateBooking}>
+            </lightning-button>
+
+            <lightning-button
+                label="View Reports"
+                class="slds-m-left_small"
+                onclick={handleViewReports}>
+            </lightning-button>
+
+            <br><br>
+
+            <h3 class="slds-text-heading_small">
+
+                Recent Bookings
+
+            </h3>
+
+            <template
+                for:each={recentBookings}
+                for:item="booking">
+
+                <p
+                    key={booking.Id}>
+
+                    {booking.Name}
+                    -
+                    {booking.Booking_Status__c}
+
+                </p>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

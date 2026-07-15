@@ -1,0 +1,58 @@
+<template>
+    <lightning-card title="Search Flights">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-input
+                label="Origin Airport"
+                value={origin}
+                onchange={handleOriginChange}>
+            </lightning-input>
+
+            <lightning-input
+                label="Destination Airport"
+                value={destination}
+                onchange={handleDestinationChange}>
+            </lightning-input>
+
+            <lightning-input
+                type="date"
+                label="Departure Date"
+                value={departureDate}
+                onchange={handleDepartureDateChange}>
+            </lightning-input>
+
+            <lightning-input
+                type="date"
+                label="Return Date (Optional)"
+                value={returnDate}
+                onchange={handleReturnDateChange}>
+            </lightning-input>
+
+            <lightning-input
+                type="number"
+                label="Adults"
+                value={adults}
+                min="1"
+                onchange={handleAdultsChange}>
+            </lightning-input>
+
+            <lightning-combobox
+                label="Cabin Class"
+                value={cabinClass}
+                options={cabinOptions}
+                onchange={handleCabinClassChange}>
+            </lightning-combobox>
+
+            <br/>
+
+            <lightning-button
+                label="Search Flights"
+                variant="brand"
+                onclick={handleSearch}>
+            </lightning-button>
+
+        </div>
+
+    </lightning-card>
+</template>

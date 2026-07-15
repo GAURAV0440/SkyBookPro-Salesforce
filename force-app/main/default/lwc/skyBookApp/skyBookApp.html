@@ -1,0 +1,95 @@
+<template>
+
+    <lightning-card title="SkyBook Pro">
+
+        <!-- ========================= -->
+        <!-- Flight Search -->
+        <!-- ========================= -->
+
+        <template if:true={showSearch}>
+
+            <div class="slds-p-around_medium">
+
+                <c-flight-search-form
+                    onflightsearch={handleFlightSearch}>
+                </c-flight-search-form>
+
+            </div>
+
+        </template>
+
+        <!-- ========================= -->
+        <!-- Flight Results -->
+        <!-- ========================= -->
+
+        <template if:true={showResults}>
+
+            <div class="slds-p-around_medium">
+
+                <c-flight-results-list
+                    flights={flights}
+                    onselectflight={handleFlightSelected}>
+                </c-flight-results-list>
+
+            </div>
+
+        </template>
+
+        <!-- ========================= -->
+        <!-- Passenger Details -->
+        <!-- ========================= -->
+
+        <template if:true={showPassengerForm}>
+
+            <div class="slds-p-around_medium">
+
+                <c-passenger-details-form
+                    passenger-count="1"
+                    onpassengersubmit={handlePassengerSubmit}>
+                </c-passenger-details-form>
+
+            </div>
+
+        </template>
+
+        <!-- ========================= -->
+        <!-- Booking Confirmation -->
+        <!-- ========================= -->
+
+        <template if:true={showConfirmation}>
+
+            <div class="slds-p-around_medium">
+
+                <c-booking-confirmation
+                    flight={selectedFlight}
+                    booking-data={bookingData}
+                    onconfirmbooking={handleBookingConfirmed}>
+                </c-booking-confirmation>
+
+            </div>
+
+        </template>
+
+        <!-- ========================= -->
+        <!-- Booking Success -->
+        <!-- ========================= -->
+
+        <template if:true={showSuccess}>
+
+            <div class="slds-p-around_medium">
+
+                <c-booking-success
+
+                    booking-id={bookingId}
+
+                    onnewbooking={handleNewBooking}>
+
+                </c-booking-success>
+
+            </div>
+
+        </template>
+
+    </lightning-card>
+
+</template>
