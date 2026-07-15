@@ -4,8 +4,9 @@ public with sharing class DuffelFlightSearchService {
     public static List<FlightOfferWrapper> searchFlights(
         String origin,
         String destination,
-        Date departureDate
-    ) {
+        Date departureDate,
+        String cabinClass
+    ){
 
         List<FlightOfferWrapper> flightOffers =
             new List<FlightOfferWrapper>();
@@ -21,19 +22,24 @@ public with sharing class DuffelFlightSearchService {
             req.setHeader('Content-Type', 'application/json');
             req.setHeader('Duffel-Version', 'v2');
 
-            String requestBody =
-            '{' +
-                '"data":{' +
-                    '"slices":[{' +
+            String slices =
+                '[' +
+                    '{' +
                         '"origin":"' + origin + '",' +
                         '"destination":"' + destination + '",' +
                         '"departure_date":"' + String.valueOf(departureDate) + '"' +
-                    '}],' +
-                    '"passengers":[{' +
-                        '"type":"adult"' +
-                    '}],' +
-                    '"cabin_class":"economy"' +
-                '}' +
+                    '}' +
+                ']';
+
+            String requestBody =
+            '{' +
+            '"data":{' +
+            '"max_connections":0,' +
+            '"max_offers":20,' +
+            '"slices":' + slices + ',' +
+            '"passengers":[{"type":"adult"}],' +
+            '"cabin_class":"' + cabinClass + '"' +
+            '}' +
             '}';
 
             req.setBody(requestBody);
@@ -80,16 +86,16 @@ public with sharing class DuffelFlightSearchService {
                             offer.get('total_currency')
                         );
 
-                    wrapper.seatClass = 'Economy';
+                    wrapper.seatClass = cabinClass;
 
-                    List<Object> slices =
+                    List<Object> offerSlices =
                         (List<Object>)offer.get('slices');
 
-                    if(slices != null &&
-                       !slices.isEmpty()){
+                    if(offerSlices != null &&
+                        !offerSlices.isEmpty()){
 
                         Map<String,Object> slice =
-                            (Map<String,Object>)slices[0];
+                            (Map<String,Object>)offerSlices[0];
 
                         wrapper.duration =
                             String.valueOf(
@@ -211,6 +217,10 @@ public with sharing class DuffelFlightSearchService {
 
             System.debug(
                 'Duffel Error => ' +
+                e.getMessage()
+            );
+
+            throw new AuraHandledException(
                 e.getMessage()
             );
         }

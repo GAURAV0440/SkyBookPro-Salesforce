@@ -47,10 +47,11 @@ private class DuffelFlightSearchServiceTest {
 
         List<FlightOfferWrapper> offers =
             DuffelFlightSearchService.searchFlights(
-                'DEL',
-                'BOM',
-                Date.today()
-            );
+            'DEL',
+            'BOM',
+            Date.today().addDays(5),
+            'economy'
+        );
 
         Test.stopTest();
 

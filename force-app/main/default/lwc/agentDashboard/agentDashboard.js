@@ -26,6 +26,16 @@ extends LightningElement {
     totalBookings = 0;
     totalRevenue = 0;
 
+    get formattedRevenue() {
+
+        return Number(
+            this.totalRevenue || 0
+        ).toLocaleString(
+            'en-IN'
+        );
+
+    }
+
     recentBookings = [];
 
     subscription = null;
@@ -86,15 +96,16 @@ extends LightningElement {
 
     handleCreateBooking() {
 
-        alert(
-            'Create Booking action clicked'
-        );
+        window.location.reload();
+
     }
 
     handleViewReports() {
 
-        alert(
-            'View Reports action clicked'
+        window.open(
+            '/lightning/o/Report/home',
+            '_blank'
         );
+
     }
 }

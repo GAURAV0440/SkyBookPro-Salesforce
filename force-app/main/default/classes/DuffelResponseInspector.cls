@@ -6,7 +6,8 @@ public with sharing class DuffelResponseInspector {
             DuffelFlightSearchService.searchFlights(
                 'DEL',
                 'BOM',
-                Date.today().addDays(20)
+                Date.today(),
+                'economy'
             );
 
         System.debug(

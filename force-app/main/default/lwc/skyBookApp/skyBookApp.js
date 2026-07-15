@@ -48,7 +48,12 @@ export default class SkyBookApp extends LightningElement {
 
             console.error(error);
 
-            alert('Unable to search flights.');
+            let message =
+                error?.body?.message ||
+                error?.message ||
+                JSON.stringify(error);
+
+            alert(message);
 
         }
 

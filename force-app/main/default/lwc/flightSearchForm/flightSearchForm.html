@@ -1,4 +1,5 @@
 <template>
+
     <lightning-card title="Search Flights">
 
         <div class="slds-p-around_medium">
@@ -20,13 +21,6 @@
                 label="Departure Date"
                 value={departureDate}
                 onchange={handleDepartureDateChange}>
-            </lightning-input>
-
-            <lightning-input
-                type="date"
-                label="Return Date (Optional)"
-                value={returnDate}
-                onchange={handleReturnDateChange}>
             </lightning-input>
 
             <lightning-input
@@ -55,4 +49,5 @@
         </div>
 
     </lightning-card>
+
 </template>

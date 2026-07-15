@@ -20,7 +20,7 @@
                     Total Revenue:
                 </b>
 
-                ₹{totalRevenue}
+                ₹{formattedRevenue}
 
             </p>
 
@@ -50,14 +50,18 @@
                 for:each={recentBookings}
                 for:item="booking">
 
-                <p
-                    key={booking.Id}>
+                <div
+                    key={booking.Id}
+                    class="slds-box slds-m-bottom_x-small">
 
-                    {booking.Name}
-                    -
+                    <b>{booking.Name}</b>
+
+                    <br>
+
+                    Status:
                     {booking.Booking_Status__c}
 
-                </p>
+                </div>
 
             </template>
 
