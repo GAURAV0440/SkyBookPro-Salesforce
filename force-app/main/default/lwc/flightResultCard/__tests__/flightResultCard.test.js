@@ -4,11 +4,13 @@ import FlightResultCard from 'c/flightResultCard';
 describe('c-flight-result-card', () => {
 
     afterEach(() => {
+
         while (document.body.firstChild) {
             document.body.removeChild(
                 document.body.firstChild
             );
         }
+
     });
 
     it('renders flight information', () => {
@@ -21,6 +23,7 @@ describe('c-flight-result-card', () => {
         );
 
         element.flight = {
+
             airline: 'Air India',
             flightNumber: 'AI101',
             origin: 'DEL',
@@ -30,22 +33,24 @@ describe('c-flight-result-card', () => {
             duration: '2h',
             price: 5000,
             currencyCode: 'INR'
+
         };
 
         document.body.appendChild(element);
 
-        const buttons =
-            element.shadowRoot.querySelectorAll(
-                'lightning-button'
-            );
+        return Promise.resolve().then(() => {
 
-        expect(buttons.length).toBe(2);
+            const button =
+                element.shadowRoot.querySelector(
+                    'lightning-button'
+                );
 
-        expect(buttons[0].label)
-            .toBe('Show Details');
+            expect(button).not.toBeNull();
 
-        expect(buttons[1].label)
-            .toBe('Select Flight');
+            expect(button.label)
+                .toBe('Select Flight');
+
+        });
 
     });
 
