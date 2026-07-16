@@ -440,22 +440,6 @@ sf project deploy start --source-dir force-app --target-org skybook-dev
 
 ---
 
-# Screenshots
-
-Screenshots are not included in the repository yet.
-
-Suggested screenshots to add later:
-
-| Screenshot                | Suggested file                              |
-| ------------------------- | ------------------------------------------- |
-| Flight search page        | `docs/screenshots/flight-search.png`        |
-| Flight results page       | `docs/screenshots/flight-results.png`       |
-| Booking confirmation page | `docs/screenshots/booking-confirmation.png` |
-| My Bookings dashboard     | `docs/screenshots/my-bookings.png`          |
-| Agent dashboard           | `docs/screenshots/agent-dashboard.png`      |
-
----
-
 # Future Improvements
 
 - Rename the legacy `Amadeus_Offer_ID__c` field to a Duffel-friendly name.
